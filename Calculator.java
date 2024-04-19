@@ -1,5 +1,6 @@
 package arabianAndRoman;
 import java.util.Scanner;
+import java.io.*;
 
 public class Calculator {
     public static void main(String[] args) {
@@ -26,7 +27,7 @@ public class Calculator {
             return;
         }
 
-        // Devide string by arithmetic charecter
+        // Devide string by arithmetic character
         String[] data = exp.split(regexActions[actionIndex]);
 
         //Determine if there are both numbers are in equal format or not)
@@ -51,22 +52,33 @@ public class Calculator {
                 b = Integer.parseInt(data[1]);
             }
 
+
             // making arithmetic actions with numbers
             int result;
-            switch (actions[actionIndex]){
-                case "+":
-                    result = a+b;
-                    break;
-                case "-":
-                    result = a-b;
-                    break;
-                case "*":
-                    result = a*b;
-                    break;
-                default:
-                    result = a/b;
-                    break;
+
+//            try {
+//                System.out.println("An exception in program");
+//                result = a/b;
+//            }catch (ArithmeticException e){
+//                System.out.println("Devide to null is forbidden!!!");
+//                result =0;
+//            }
+//            System.out.println("The method is done!");
+
+            try {
+                System.out.println(a/b);
+            }catch (ArithmeticException e){
+                System.out.println(" Devide by zero operation is not possible");
             }
+
+            result = switch (actions[actionIndex]) {
+                case "+" -> a + b;
+                case "-" -> a - b;
+                case "*" -> a * b;
+                default -> a / b;
+            };
+
+
             //15->XV
             if(isRoman){
 
